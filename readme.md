@@ -9,10 +9,10 @@
 Return locations of non-legal UTF-8 encoded bytes in the <code>buffer</code>
 as begin/end index tuples.
 
-    buffer:     an array or array-like object
+    buffer:     an array or array-like object containing byte values (integers in the range 0-255)
     options:    
-        beg:    (default 0) inclusive index to begin checking
-        end:    (default buffer.length) exclusive index to end checking 
+        beg:    inclusive index to begin checking (defaults to 0) 
+        end:    exclusive index to end checking (defaults to buffer.length) 
         
 ## Example
 
@@ -24,6 +24,6 @@ as begin/end index tuples.
     > [ [2,4], [6,7] ]
  
 
-    console.log( illegal_bytes( buf, { beg: 3 } ) );
+    console.log( illegal_bytes( buf, { beg: 3 } ) );  // start at offset 3 ( byte 0x83 )
     
-    > [ [3,4] ]
+    > [ [3,4], [6,7] ]

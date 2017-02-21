@@ -13,6 +13,8 @@ test('illegal_bytes options', function(t) {
         [ null,    null,      []    ],
         [ 0,       null,      []    ],
         [ null,    4,         []    ],
+        [ 0,       0,         []    ],
+        [ 4,       4,         []    ],
         [ 0,       4,         []    ],
         [ 1,       4,         []    ],
         [ 2,       4,         [[2,3]] ],
@@ -31,14 +33,20 @@ test('illegal_bytes options', function(t) {
     })
 })
 
-// test('illegal_bytes', function(t) {
-//     t.tableAssert([
-//         [ 'buf',                                                'exp' ],
-//         //  ok     short      ok   short     ok      xlead        short         ok   xlead
-//         // ----  ----------  ----  ----  ----------  ----    ----------------  ----  ----
-//         [ [0x61, 0xF0, 0x90, 0x62, 0xC3, 0xC3, 0xA9, 0xA9,   0xE0, 0xC2, 0xC1, 0x63, 0xC1 ],  [[1,3],[4,5],[7,8],[8,11],[13,14]] ],
-//     ], illegal_bytes)
-// })
-//
-// var buf = [0x61, 0x62, 0xF0, 0x83, 0x63, 0x64, 0xC2];
-// console.log( illegal_bytes( buf ) );
+test('illegal_bytes', function(t) {
+    t.tableAssert([
+        [ 'buf',                                                                            'exp' ],
+        // all short
+        [ [0xF0, 0xE0, 0xC0 ],                                            [ [0,1], [1,2], [2,3] ] ],
+        [ [0xF0, 0x61, 0xE0, 0x62, 0xC0 ],                                [ [0,1], [2,3], [4,5] ] ],
+        // no leads
+        [ [0xA7, 0xA8, 0xA9 ],                                            [ [0,3] ]               ],
+        [ [0xA7, 0x61, 0xA8, 0x62, 0xA9 ],                                [ [0,1], [2,3], [4,5] ] ],
+        [ [0x61, 0x62, 0x63, 0xA7, 0x61, 0x62 ],                          [ [3,4] ]               ],
+        //  ok     short      ok   short     ok      xlead xlead  ok   xlead
+        // ----  ----------  ----  ----  ----------  ----  ----- ----  ----
+        [ [0x61, 0xF0, 0x90, 0x62, 0xC3, 0xC3, 0xA9, 0xA9, 0xA9, 0x63, 0xA9 ],  [ [1,3], [4,5], [7,9], [10,11]] ],
+    ], illegal_bytes)
+})
+
+
