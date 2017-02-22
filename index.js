@@ -1,7 +1,7 @@
 module.exports = function(buf, opt) {
     opt = opt || {}
     var i = opt.beg || 0
-    var end = opt.end || buf.length
+    var end = opt.end == null ? buf.length : opt.end
     var ret = []
     if(i >= end) { return [] }
     main: while(i < end) {
