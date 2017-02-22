@@ -9,28 +9,22 @@ test('illegal_bytes options', function(t) {
         0x62,       // 'b'
     ]
     t.tableAssert([
-        [ 'beg',   'end',     'exp' ],
-        [ null,    null,      []    ],
-        [ 0,       null,      []    ],
-        [ null,    4,         []    ],
-        [ 0,       0,         []    ],
-        [ 4,       4,         []    ],
-        [ 0,       4,         []    ],
-        [ 1,       4,         []    ],
-        [ 2,       4,         [[2,3]] ],
-        [ 3,       4,         []    ],
-        [ 4,       4,         []    ],
-        [ 0,       0,         [] ],
-        [ 0,       1,         [] ],
-        [ 0,       2,         [[1,2]] ],
-        [ 0,       3,         [] ],
-    ], function(beg, end) {
-        if(beg != null || end != null) {
-            return illegal_bytes(buf, {beg: beg, end: end})
-        } else {
-            return illegal_bytes(buf)
-        }
-    })
+        [ 'buf',  'opt',               'exp'   ],
+        [  buf,    null,               []      ],
+        [  buf,    {beg:0},            []      ],
+        [  buf,    {end:4},            []      ],
+        [  buf,    {beg:0,end:0},      []      ],
+        [  buf,    {beg:4,end:4},      []      ],
+        [  buf,    {beg:0,end:4},      []      ],
+        [  buf,    {beg:1,end:4},      []      ],
+        [  buf,    {beg:2,end:4},      [[2,3]] ],
+        [  buf,    {beg:3,end:4},      []      ],
+        [  buf,    {beg:4,end:4},      []      ],
+        [  buf,    {beg:0,end:0},      []      ],
+        [  buf,    {beg:0,end:1},      []      ],
+        [  buf,    {beg:0,end:2},      [[1,2]] ],
+        [  buf,    {beg:0,end:3},      []      ],
+    ], illegal_bytes)
 })
 
 test('illegal_bytes', function(t) {
