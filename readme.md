@@ -1,5 +1,4 @@
 # qb-utf8-illegal-bytes(buffer, options)
-# Standard - ESLint Shareable Config
 [![npm][npm-image]][npm-url]
 [![downloads][downloads-image]][downloads-url]
 
