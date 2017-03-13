@@ -23,8 +23,8 @@ module.exports = function (src, off, lim) {
             }
         } else {
             // unexpected trailing byte
-            while (i < lim && (src[i] & 0xC0) === 0x80) { i++ }
-            ret.push([start, i])                                    // skip all trailing bytes
+            while (i < lim && (src[i] & 0xC0) === 0x80) { i++ }     // skip all trailing bytes
+            ret.push([start, i])
         }
     }
     return ret
