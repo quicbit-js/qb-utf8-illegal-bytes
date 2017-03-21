@@ -1,4 +1,4 @@
-# qb-utf8-illegal-bytes(buffer, options)
+# qb-utf8-illegal-bytes
 
 [![npm][npm-image]][npm-url]
 [![downloads][downloads-image]][npm-url]
