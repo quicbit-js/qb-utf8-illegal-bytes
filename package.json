@@ -11,8 +11,7 @@
     "test-kit": "^2.3.0"
   },
   "scripts": {
-    "test": "tape test.js",
-    "testc": "tap --coverage-report=html test.js"
+    "test": "tap --coverage-report=html test.js"
   },
   "files": [
     "index.js"
