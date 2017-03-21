@@ -1,6 +1,6 @@
 {
   "name": "qb-utf8-illegal-bytes",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "Small and fast function that reports locations of non-legal UTF-8 encoded bytes as range tuples",
   "homepage": "https://github.com/quicbit-js/qb-utf8-illegal-bytes",
   "url": "https://github.com/quicbit-js/qb-utf8-illegal-bytes/issues",
@@ -8,7 +8,7 @@
   "repository": "quicbit-js/qb-utf8-illegal-bytes",
   "devDependencies": {
     "tape": "^4.6.3",
-    "test-kit": "^2.3.0"
+    "test-kit": "^2.3.1"
   },
   "scripts": {
     "test": "tap --coverage-report=html test.js"
