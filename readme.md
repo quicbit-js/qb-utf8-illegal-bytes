@@ -2,7 +2,7 @@
 
 [![npm][npm-image]][npm-url]
 [![downloads][downloads-image]][npm-url]
-[![bitHound Dependencies][proddep-image]][proddep-link]
+[![dependencies][proddep-image]][proddep-link]
 [![dev dependencies][devdep-image]][devdep-link]
 [![code analysis][code-image]][code-link]
 
@@ -16,20 +16,8 @@
 [code-image]:      https://www.bithound.io/github/quicbit-js/qb-utf8-illegal-bytes/badges/code.svg
 [code-link]:       https://www.bithound.io/github/quicbit-js/qb-utf8-illegal-bytes
 
-Tiny script for converting utf-8 to string based upon decodeURIComponent().  
-Runs in nodejs and in browser.  Not efficient for large strings.
-
-    module.exports = function utf8_to_str (src, off, lim) {
-      lim = lim == null ? src.length : lim
-      for (var i = off || 0, s = ''; i < lim; i++) {
-        var h = src[i].toString(16)
-        if (h.length < 2) h = '0' + h
-        s += '%' + h
-      }
-      return decodeURIComponent(s)
-    }
-
-That's it.  That's the code.
+Compact and vary fast function that returns locations of non-legal UTF-8 encoded bytes in an array of
+bytes (array or typed array holding integer values 0-255)
 
 **Complies with the 100% test coverage and minimum dependency requirements** of 
 [qb-standard](http://github.com/quicbit-js/qb-standard) . 
@@ -47,7 +35,7 @@ approach for array-like inputs throughout quicbit libraries.
 ## illegal_bytes([src][src-link], [off][off-link], [lim][lim-link])
 
 Return locations of non-legal UTF-8 encoded bytes in a [src][src-link] array or array-like
-object of integers (0-255).  Start checking at the [off][off-link] (defaults to 0)
+object of bytes (integers 0-255).  Start checking at the [off][off-link] (defaults to 0)
 and ending before the optional [lim][off-link] (defaults to src.length).
 Resulting ranges are returned as an array of \[off, lim\] pairs where
 again, off is inclusive and lim is exclusive.
@@ -59,10 +47,10 @@ again, off is inclusive and lim is exclusive.
         
 ## Example
 
-    var illegal_bytes = require( 'qb-utf8-illegal-bytes' );
+    var illegal_bytes = require( 'qb-utf8-illegal-bytes' )
     
-    var src = [0x61, 0x62, 0xF0, 0x83, 0x63, 0x64, 0xC2];
-    console.log( illegal_bytes( src ) );
+    var src = [0x61, 0x62, 0xF0, 0x83, 0x63, 0x64, 0xC2]
+    console.log( illegal_bytes( src ) )
     
     > [ [2,4], [6,7] ]
  
