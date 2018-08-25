@@ -54,7 +54,10 @@ again, off is inclusive and lim is exclusive.
     
     > [ [2,4], [6,7] ]
  
+...which shows that bytes at offsets 2, 3 and 6 are illegal 
 
     console.log( illegal_bytes( src, 3 ) );  // start at offset 3 ( byte 0x83 )
     
     > [ [3,4], [6,7] ]
+    
+...which shows that bytes at offsets 3 and 6 are illegal 
