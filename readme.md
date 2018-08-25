@@ -49,7 +49,7 @@ again, off is inclusive and lim is exclusive.
 
     var illegal_bytes = require( 'qb-utf8-illegal-bytes' )
     
-    var src = [0x61, 0x62, 0xF0, 0x83, 0x63, 0x64, 0xC2]
+    var src = [0x61, 0x62, 0xF0, 0x83, 0x63, 0x64, 0xC2]        // alternatively, this can be a node Buffer or Uint8Array
     console.log( illegal_bytes( src ) )
     
     > [ [2,4], [6,7] ]

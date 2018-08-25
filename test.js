@@ -1,7 +1,7 @@
 var test = require('test-kit').tape()
 var illegal_bytes = require('.')
 
-test('illegal_bytes options', function (t) {
+test('various input and options', function (t) {
     var buf = [
         0x61,       // 'a'
         0xC3,       // 'é' - 2 bytes
@@ -50,4 +50,15 @@ test('illegal_bytes options', function (t) {
         // ----  ----------  ----  ----  ----------  ----  ----- ----  ----
         [ [ 0x61, 0xF0, 0x90, 0x62, 0xC3, 0xC3, 0xA9, 0xA9, 0xA9, 0x63, 0xA9 ], null, null, [ [1,3], [4,5], [7,9], [10,11] ] ],
     ], illegal_bytes)
+})
+
+test('Uint8Array', function (t) {
+    t.tableAssert([
+        [ 'buf',                                                  'off', 'lim', 'exp' ],
+        [ [ 240, 97, 224, 98, 192 ],                              1,     5,     [ [2, 3], [4, 5] ] ],
+        [ [ 167, 168, 169 ],                                      1,     null,  [ [1, 3] ] ],
+        [ [ 97, 240, 144, 98, 195, 195, 169, 169, 169, 99, 169 ], null,  null,  [ [1, 3], [4, 5], [7, 9], [10, 11] ] ],
+    ], function (buf, off, lim) {
+        return illegal_bytes(new Uint8Array(buf), off, lim)
+    })
 })
